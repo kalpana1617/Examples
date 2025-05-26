@@ -1,7 +1,9 @@
 package SerializationAndDeserialization;
 
+import java.beans.Transient;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,7 +11,7 @@ import java.io.Serializable;
 
 public class Employee implements Serializable {
 
-	private String name;
+	private transient String name;
 	private int id;
 	private double salary;
 
@@ -35,7 +37,11 @@ public class Employee implements Serializable {
 		}
 		try (ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream("D:\\Employee.ser"))) {
 			Employee deSerialization = (Employee) objectInput.readObject();
-			System.out.println("Deserialized Employee: " + deSerialization);
+			FileWriter fileWriter =new FileWriter("D:\\Employee-object.txt");
+			fileWriter.write(deSerialization.toString());
+			System.out.println("De-serialized data is saved in Employee-object.txt");
+			fileWriter.close();
+//			System.out.println("Deserialized Employee: " + deSerialization);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
