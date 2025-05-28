@@ -10,6 +10,6 @@ public class LambdaForEachExample {
 		
 		  List<String> list = Arrays.asList("Banana", "Cherry", "Apple");
 		  Collections.sort(list);
-		  list.forEach(item -> System.out.println("Fruit:"+item));
+		  list.forEach(System.out::println);
 	}
 }
